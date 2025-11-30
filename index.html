@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+    }
+
+    .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 50px 0;
+    }
+
+    .header h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    /* Filter Buttons */
+    .filter {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter button {
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .filter button:hover,
+    .filter button.active {
+      background-color: #084298;
+    }
+
+    /* Gallery Grid */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05) rotate(-2deg);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Full Image View */
+    .full-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .full-image.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .full-image img {
+      width: 60%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .full-image span {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .full-image span:hover {
+      color: #ff4444;
+    }
+
+    /* Next/Prev Buttons */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.3);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .prev {
+      left: 50px;
+    }
+
+    .next {
+      right: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="header">
+      <h2>🌸 Flower World Gallery</h2>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="filter">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="mountain">Mountains</button>
+      <button data-filter="flower">Flowers</button>
+      <button data-filter="snow">Snow</button>
+      <button data-filter="waterfall">Waterfalls</button>
+    </div>
+
+    <!-- Gallery -->
+    <div class="gallery" id="gallery">
+      <img src="img/mountain3.png" data-category="mountain" alt="Mountain">
+      <img src="img/flower bouquet.png" data-category="flower" alt="Flower">
+      <img src="img/snow1.png" data-category="snow" alt="Snow">
+      <img src="img/mountain4.png" data-category="mountain" alt="Mountain">
+      <img src="img/snow2.png" data-category="snow" alt="Snow">
+      <img src="img/flowers.png" data-category="flower" alt="Flower">
+      <img src="img/mountain2.png" data-category="waterfall" alt="Waterfall">
+      <img src="img/mountain1.png" data-category="waterfall" alt="Waterfall">
+
+            <img src="img/mountain3.png" data-category="mountain" alt="Mountain">
+      <img src="img/flower bouquet.png" data-category="flower" alt="Flower">
+      <img src="img/snow1.png" data-category="snow" alt="Snow">
+      <img src="img/mountain4.png" data-category="mountain" alt="Mountain">
+      <img src="img/snow2.png" data-category="snow" alt="Snow">
+      <img src="img/flowers.png" data-category="flower" alt="Flower">
+      <img src="img/mountain2.png" data-category="waterfall" alt="Waterfall">
+      <img src="img/mountain1.png" data-category="waterfall" alt="Waterfall">
+
+            <img src="img/mountain3.png" data-category="mountain" alt="Mountain">
+      <img src="img/flower bouquet.png" data-category="flower" alt="Flower">
+      <img src="img/snow1.png" data-category="snow" alt="Snow">
+      <img src="img/mountain4.png" data-category="mountain" alt="Mountain">
+      <img src="img/snow2.png" data-category="snow" alt="Snow">
+      <img src="img/flowers.png" data-category="flower" alt="Flower">
+      <img src="img/mountain2.png" data-category="waterfall" alt="Waterfall">
+      <img src="img/mountain1.png" data-category="waterfall" alt="Waterfall">
+    </div>
+  </div>
+
+  <!-- Full Image View -->
+  <div class="full-image" id="fullImageBox">
+    <span id="closeBtn">&times;</span>
+    <button class="nav-btn prev" id="prevBtn">&#10094;</button>
+    <img src="" id="fullImg" alt="Full View">
+    <button class="nav-btn next" id="nextBtn">&#10095;</button>
+  </div>
+
+  <script>
+    const galleryImages = document.querySelectorAll('.gallery img');
+    const fullImageBox = document.getElementById('fullImageBox');
+    const fullImg = document.getElementById('fullImg');
+    const closeBtn = document.getElementById('closeBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const filterButtons = document.querySelectorAll('.filter button');
+
+    let currentIndex = 0;
+
+    // Show Full Image
+    galleryImages.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        fullImageBox.classList.add('show');
+        fullImg.src = img.src;
+        currentIndex = index;
+      });
+    });
+
+    // Close Full Image
+    closeBtn.addEventListener('click', () => {
+      fullImageBox.classList.remove('show');
+    });
+
+    // Navigate Images
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      fullImg.src = galleryImages[currentIndex].src;
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      fullImg.src = galleryImages[currentIndex].src;
+    });
+
+    // Filter Function
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        galleryImages.forEach(img => {
+          const category = img.dataset.category;
+          if (filter === 'all' || category === filter) {
+            img.style.display = 'block';
+          } else {
+            img.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
